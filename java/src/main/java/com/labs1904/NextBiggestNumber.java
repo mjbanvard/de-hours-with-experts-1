@@ -121,24 +121,15 @@ public class NextBiggestNumber {
         } else if (a > d) {
             bld4Arr[0] = a;
             int[] ordArr = {b, c, d};
-            Arrays.sort(ordArr);
-            bld4Arr[1] = ordArr[0];
-            bld4Arr[2] = ordArr[1];
-            bld4Arr[3] = ordArr[2];
+            wipe3(bld4Arr, ordArr);
         } else if (b > d) {
             bld4Arr[0] = b;
             int[] ordArr = {a, c, d};
-            Arrays.sort(ordArr);
-            bld4Arr[1] = ordArr[0];
-            bld4Arr[2] = ordArr[1];
-            bld4Arr[3] = ordArr[2];
+            wipe3(bld4Arr, ordArr);
         } else if (c > d) {
             bld4Arr[0] = c;
             int[] ordArr = {a, b, d};
-            Arrays.sort(ordArr);
-            bld4Arr[1] = ordArr[0];
-            bld4Arr[2] = ordArr[1];
-            bld4Arr[3] = ordArr[2];
+            wipe3(bld4Arr, ordArr);
         }
 
         return bld4Arr;
@@ -171,58 +162,60 @@ public class NextBiggestNumber {
         } else if (a > d) {
             bld5Arr[1] = a;
             int[] ordArr = {b, c, d};
-            Arrays.sort(ordArr);
-            bld5Arr[2] = ordArr[0];
-            bld5Arr[3] = ordArr[1];
-            bld5Arr[4] = ordArr[2];
+            wipe3(bld5Arr, ordArr);
         } else if (b > d) {
             bld5Arr[1] = b;
             int[] ordArr = {a, c, d};
-            Arrays.sort(ordArr);
-            bld5Arr[2] = ordArr[0];
-            bld5Arr[3] = ordArr[1];
-            bld5Arr[4] = ordArr[2];
+            wipe3(bld5Arr, ordArr);
         } else if (c > d) {
             bld5Arr[1] = c;
             int[] ordArr = {b, a, d};
-            Arrays.sort(ordArr);
-            bld5Arr[2] = ordArr[0];
-            bld5Arr[3] = ordArr[1];
-            bld5Arr[4] = ordArr[2];
+            wipe3(bld5Arr, ordArr);
         } else if (a > e) {
             bld5Arr[0] = a;
             int[] ordArr = {b, c, d, e};
-            Arrays.sort(ordArr);
-            bld5Arr[1] = ordArr[0];
-            bld5Arr[2] = ordArr[1];
-            bld5Arr[3] = ordArr[2];
-            bld5Arr[4] = ordArr[3];
+            wipe4(bld5Arr, ordArr);
         } else if (b > e) {
             bld5Arr[0] = b;
             int[] ordArr = {a, c, d, e};
             Arrays.sort(ordArr);
-            bld5Arr[1] = ordArr[0];
-            bld5Arr[2] = ordArr[1];
-            bld5Arr[3] = ordArr[2];
-            bld5Arr[4] = ordArr[3];
+            wipe4(bld5Arr, ordArr);
         } else if (c > e) {
             bld5Arr[0] = c;
             int[] ordArr = {a, b, d, e};
-            Arrays.sort(ordArr);
-            bld5Arr[1] = ordArr[0];
-            bld5Arr[2] = ordArr[1];
-            bld5Arr[3] = ordArr[2];
-            bld5Arr[4] = ordArr[3];
+            wipe4(bld5Arr, ordArr);
         } else if (d > e) {
             bld5Arr[0] = d;
             int[] ordArr = {b, c, a, e};
-            Arrays.sort(ordArr);
-            bld5Arr[1] = ordArr[0];
-            bld5Arr[2] = ordArr[1];
-            bld5Arr[3] = ordArr[2];
-            bld5Arr[4] = ordArr[3];
+            wipe4(bld5Arr, ordArr);
         }
 
         return bld5Arr;
     }
+
+    public static int[] wipe3(int[] buildArr, int[] orderArr) {
+
+        int lnth = buildArr.length;
+
+        Arrays.sort(orderArr);
+        buildArr[lnth - 3] = orderArr[0];
+        buildArr[lnth - 2] = orderArr[1];
+        buildArr[lnth - 1] = orderArr[2];
+
+        return buildArr;
+    }
+
+    public static int[] wipe4(int[] buildArr, int[] orderArr) {
+
+        int lnth = buildArr.length;
+
+        Arrays.sort(orderArr);
+        buildArr[lnth - 4] = orderArr[0];
+        buildArr[lnth - 3] = orderArr[1];
+        buildArr[lnth - 2] = orderArr[2];
+        buildArr[lnth - 1] = orderArr[3];
+
+        return buildArr;
+    }
+
 }
