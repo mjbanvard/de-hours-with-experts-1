@@ -39,11 +39,11 @@ public class NextBiggestNumber {
 
         // Values of each index, inverted into alphabetical order.
 
-        if (bldLength == 2) {
-            twoFer(buildArray);
-        } else if (bldLength == 3) {
-            threeFer(buildArray);
-        } else if (bldLength > 3) {
+//        if (bldLength == 2) {
+//            twoFer(buildArray);
+//        } else if (bldLength == 3) {
+//            threeFer(buildArray);
+//        } else if (bldLength > 3) {
             for (int i = 1; i < bldLength; i++) {
                 int[] ordArr = new int[i];
                 if (buildArray[(bldLength - i)] > buildArray[(bldLength - i - 1)]) {
@@ -53,7 +53,7 @@ public class NextBiggestNumber {
                     preOrdList.remove(ordLength - i);
                     ordArr = preOrdList.stream().mapToInt(Integer::intValue).toArray();
                     buildArray[bldLength - i - 1] = buildArray[bldLength - i ];
-                }
+//                }
                 int oLength = ordArr.length;
                 if (oLength == 3) {
                     wipe3(buildArray, ordArr);
@@ -64,63 +64,8 @@ public class NextBiggestNumber {
                 if (oLength == 5) {
                     wipe5(buildArray, ordArr);
                 }
-            }
-        }
-//        if (arrLength == 4) {
-//            compBuildArray = fourFer(buildArray);
-//        }
-//        if (arrLength == 5) {
-//            compBuildArray = fiveFer(buildArray);
-//        }
 
-            // This rebuilds the appropriate array into an Integer to return.
-            Integer rebuiltInt = 0;
-            for (int k = 0; k < bldLength; k++) {
-                rebuiltInt *= 10;
-                rebuiltInt += buildArray[k];
-            }
-
-            if (rebuiltInt <= integ) {
-                rebuiltInt = -1;
-            }
-            return rebuiltInt;
-        }
-
-    public static int[] twoFer(int[] bld2Arr) {
-        // Method for 2 digit integer.
-
-        int a2Length = bld2Arr.length;
-        int a = bld2Arr[a2Length - 1];
-        int b = bld2Arr[a2Length - 2];
-
-        if (a > b) {
-            bld2Arr[0] = a;
-            bld2Arr[1] = b;
-        }
-        return bld2Arr;
-    }
-
-    private static int[] threeFer(int[] bld3Arr) {
-        //Simple method for 3 digit integer.
-
-        int aLength = bld3Arr.length;
-        int a = bld3Arr[aLength - 1];
-        int b = bld3Arr[aLength - 2];
-        int c = bld3Arr[aLength - 3];
-
-        if (a > b) {
-            bld3Arr[1] = a;
-            bld3Arr[2] = b;
-        } else if (b > c){
-            bld3Arr[0] = b;
-            bld3Arr[1] = a;
-            bld3Arr[2] = c;
-        }
-
-        return bld3Arr;
-    }
-
-//    public static int[] fourFer(int[] bld4Arr) {
+                //    public static int[] fourFer(int[] bld4Arr) {
 //        // Method for 4 digit integer. Requires a sub array to order the remaining
 //        // digits, below the digit swapped.
 //        //
@@ -233,39 +178,97 @@ public class NextBiggestNumber {
 //        return bld5Arr;
 //    }
 
-    private static void wipe3(int[] buildArr, int[] orderArr) {
+                private static void wipe3( int[] buildArr, int[] orderArr) {
 
-        int lnth = buildArr.length;
+                    int lnth = buildArr.length;
 
-        Arrays.sort(orderArr);
-        buildArr[lnth - 3] = orderArr[0];
-        buildArr[lnth - 2] = orderArr[1];
-        buildArr[lnth - 1] = orderArr[2];
-        //  return buildArr;
+                    Arrays.sort(orderArr);
+                    buildArr[lnth - 3] = orderArr[0];
+                    buildArr[lnth - 2] = orderArr[1];
+                    buildArr[lnth - 1] = orderArr[2];
+                    //  return buildArr;
+                }
+
+                public static void wipe4(int[] buildArr, int[] orderArr) {
+
+                    int lnth = buildArr.length;
+
+                    Arrays.sort(orderArr);
+                    buildArr[lnth - 4] = orderArr[0];
+                    buildArr[lnth - 3] = orderArr[1];
+                    buildArr[lnth - 2] = orderArr[2];
+                    buildArr[lnth - 1] = orderArr[3];
+                    //   return buildArr;
+                }
+
+                public static void wipe5(int[] buildArr, int[] orderArr) {
+
+                    int lnth = buildArr.length;
+
+                    Arrays.sort(orderArr);
+                    buildArr[lnth - 5] = orderArr[0];
+                    buildArr[lnth - 4] = orderArr[1];
+                    buildArr[lnth - 3] = orderArr[2];
+                    buildArr[lnth - 2] = orderArr[3];
+                    buildArr[lnth - 1] = orderArr[4];
+                    //   return buildArr;
+                }
+//            }
+//        }
+//        if (arrLength == 4) {
+//            compBuildArray = fourFer(buildArray);
+//        }
+//        if (arrLength == 5) {
+//            compBuildArray = fiveFer(buildArray);
+//        }
+
+            // This rebuilds the appropriate array into an Integer to return.
+            Integer rebuiltInt = 0;
+            for (int k = 0; k < bldLength; k++) {
+                rebuiltInt *= 10;
+                rebuiltInt += buildArray[k];
+            }
+
+            if (rebuiltInt <= integ) {
+                rebuiltInt = -1;
+            }
+            return rebuiltInt;
+        }
+
+    public static int[] twoFer(int[] bld2Arr) {
+        // Method for 2 digit integer.
+
+        int a2Length = bld2Arr.length;
+        int a = bld2Arr[a2Length - 1];
+        int b = bld2Arr[a2Length - 2];
+
+        if (a > b) {
+            bld2Arr[0] = a;
+            bld2Arr[1] = b;
+        }
+//        return bld2Arr;
     }
 
-    public static void wipe4(int[] buildArr, int[] orderArr) {
+    private static int[] threeFer(int[] bld3Arr) {
+        //Simple method for 3 digit integer.
 
-        int lnth = buildArr.length;
+        int aLength = bld3Arr.length;
+        int a = bld3Arr[aLength - 1];
+        int b = bld3Arr[aLength - 2];
+        int c = bld3Arr[aLength - 3];
 
-        Arrays.sort(orderArr);
-        buildArr[lnth - 4] = orderArr[0];
-        buildArr[lnth - 3] = orderArr[1];
-        buildArr[lnth - 2] = orderArr[2];
-        buildArr[lnth - 1] = orderArr[3];
-        //   return buildArr;
+        if (a > b) {
+            bld3Arr[1] = a;
+            bld3Arr[2] = b;
+        } else if (b > c){
+            bld3Arr[0] = b;
+            bld3Arr[1] = a;
+            bld3Arr[2] = c;
+        }
+
+//        return bld3Arr;
     }
 
-    public static void wipe5(int[] buildArr, int[] orderArr) {
 
-        int lnth = buildArr.length;
-
-        Arrays.sort(orderArr);
-        buildArr[lnth - 5] = orderArr[0];
-        buildArr[lnth - 4] = orderArr[1];
-        buildArr[lnth - 3] = orderArr[2];
-        buildArr[lnth - 2] = orderArr[3];
-        buildArr[lnth - 1] = orderArr[4];
-        //   return buildArr;
-    }
 }
+
