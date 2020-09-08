@@ -40,13 +40,13 @@ public class NextBiggestNumber {
                 int low = numElements - j;
                 int high = numElements - i;
                 if (buildArray[low] > buildArray[high]) {
-                    // Swap compared values
+        // Swap compared values
                     int temp;
                     temp = buildArray[high];
                     buildArray[high] = buildArray[low];
                     buildArray[low] = temp;
 
-                    // Create list of elements, stored in indeces above 'i'.
+        // Create list of elements, stored in indeces above 'i'.
                     int[] ordArr;
                     ordArr = Arrays.copyOfRange( buildArray, (high + 1), numElements );
 //                    List<Integer> preOrdList = IntStream.of( ordArr ).boxed().collect( Collectors.toList() );
@@ -56,6 +56,7 @@ public class NextBiggestNumber {
 
                     // Call appropriate method to reorder portion of 'buildArray'.
                     if (oLength == 1) {
+
                     } else if (oLength == 2) {
                         wipe2( buildArray, ordArr );
                     } else if (oLength == 3) {
