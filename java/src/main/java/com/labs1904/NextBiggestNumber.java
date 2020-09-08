@@ -37,27 +37,16 @@ public class NextBiggestNumber {
                 int high = numElements - i;
                 if (buildArray[low] > buildArray[high]) {
         // Swap compared values
-                    System.out.println("Yup, if statement matched");
                     int temp;
                     temp = buildArray[high];
                     buildArray[high] = buildArray[low];
                     buildArray[low] = temp;
 
-        // Create list of elements, stored in indeces above 'i'.
+        // Create list of elements, stored in indeces above 'high'.
                     int[] ordArr;
                     ordArr = Arrays.copyOfRange( buildArray, (high + 1), numElements );
-                    int oLength = ordArr.length;
+                    wipeAll( buildArray, ordArr );
 
-                    // Call appropriate method to reorder portion of 'buildArray'.
-                   if (oLength == 2) {
-                        wipe2( buildArray, ordArr );
-                    } else if (oLength == 3) {
-                        wipe3( buildArray, ordArr );
-                    } else if (oLength == 4) {
-                        wipe4( buildArray, ordArr );
-                    } else if (oLength == 5) {
-                        wipe5( buildArray, ordArr );
-                    }
         // Once the match is found, end both loops by breaking outer loop
                     break outer;
                 }
@@ -76,49 +65,13 @@ public class NextBiggestNumber {
         }
     }
 
-    private static void wipe2 (int[] buildArr, int[] orderArr){
-
+    public static void wipeAll (int[] buildArr, int [] orderArr) {
         int lnth = buildArr.length;
+        int oLnth = orderArr.length;
 
-        Arrays.sort( orderArr );
-        buildArr[lnth - 2] = orderArr[0];
-        buildArr[lnth - 1] = orderArr[1];
-
-    }
-
-    private static void wipe3 (int[] buildArr, int[] orderArr){
-
-        int lnth = buildArr.length;
-
-        Arrays.sort( orderArr );
-        buildArr[lnth - 3] = orderArr[0];
-        buildArr[lnth - 2] = orderArr[1];
-        buildArr[lnth - 1] = orderArr[2];
-
-    }
-
-    public static void wipe4 (int[] buildArr, int[] orderArr){
-
-        int lnth = buildArr.length;
-
-        Arrays.sort( orderArr );
-        buildArr[lnth - 4] = orderArr[0];
-        buildArr[lnth - 3] = orderArr[1];
-        buildArr[lnth - 2] = orderArr[2];
-        buildArr[lnth - 1] = orderArr[3];
-
-    }
-
-    public static void wipe5 (int[] buildArr, int[] orderArr){
-
-        int lnth = buildArr.length;
-
-        Arrays.sort( orderArr );
-        buildArr[lnth - 5] = orderArr[0];
-        buildArr[lnth - 4] = orderArr[1];
-        buildArr[lnth - 3] = orderArr[2];
-        buildArr[lnth - 2] = orderArr[3];
-        buildArr[lnth - 1] = orderArr[4];
-
+        Arrays.sort(orderArr);
+        for (int m = 0; m < oLnth; m++) {
+            buildArr[lnth - (oLnth - m)] = orderArr[m];
+        }
     }
 }
