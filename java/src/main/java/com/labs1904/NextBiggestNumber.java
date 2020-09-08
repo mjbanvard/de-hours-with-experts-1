@@ -4,6 +4,10 @@ import java.util.Arrays;
 
 public class NextBiggestNumber {
 
+        // This class will successfully run for a positive of any length, not just the 6 digits within
+        // the 150 test cases. Added one test case to TestNextBiggestNumberTest.java to check. Not an
+        // exhaustive testing strategy, but a great proof of concept.
+
     public static void main(String[] args) {
         Integer input = Integer.parseInt( args[0] );
         int nextBiggestNumber = getNextBiggestNumber( input );

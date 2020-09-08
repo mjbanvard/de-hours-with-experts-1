@@ -6,6 +6,11 @@ import org.junit.Test;
 public class TestNextBiggestNumberTest {
 
     @Test
+    public void test5976432() {
+        Assert.assertEquals(6234579, NextBiggestNumber.getNextBiggestNumber(5976432));
+    }
+
+    @Test
     public void testSimpleCases() {
         Assert.assertEquals(21, NextBiggestNumber.getNextBiggestNumber(12));
         Assert.assertEquals(132, NextBiggestNumber.getNextBiggestNumber(123));
