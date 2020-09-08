@@ -23,59 +23,80 @@ public class NextBiggestNumber {
         //Return out of loop, once nBN is found.
 
         String iString = integ.toString();
-        int strLength = iString.length();
-        int[] buildArray = new int[strLength];
-
-        for (int i = 0; i < strLength; i++) {
+        int numElements = iString.length();
+        int rebuiltInt = 0;
+        int[] buildArray = new int[numElements];
+        for (int i = 0; i < numElements; i++) {
             buildArray[i] = iString.charAt( i ) - '0';
         }
-        Integer rebuiltInt = 0;
-
+        int[] origBuild = buildArray;
 
         // Now that the array is created, we need to make a method that juggles the indeces, eliminates the
         // values less than the original number, and narrows down the remaining numbers to find the one that is
         // "just greater than" the given input.
 
-        // Values of each index, inverted into alphabetical order.
+        for (int i = 2; i < numElements; i += 1)
+            for (int j = 1; j < i; j += 1) {
+                int low = numElements - j;
+                int high = numElements - i;
+                if (buildArray[low] > buildArray[high]) {
+                    // Swap compared values
+                    int temp;
+                    temp = buildArray[high];
+                    buildArray[high] = buildArray[low];
+                    buildArray[low] = temp;
 
-        for (int i = 1; i < strLength; i++) {
-            int[] ordArr;
-            if (buildArray[(strLength - i)] > buildArray[(strLength - i - 1)]) {
-                ordArr = Arrays.copyOfRange( buildArray, (strLength - i - 1), strLength );
-                int ordLength = ordArr.length;
-                List<Integer> preOrdList = IntStream.of( ordArr ).boxed().collect( Collectors.toList() );
-                preOrdList.remove( ordLength - i );
-                ordArr = preOrdList.stream().mapToInt( Integer::intValue ).toArray();
-                buildArray[strLength - i - 1] = buildArray[strLength - i];
-//                }
-                int oLength = ordArr.length;
-                if (oLength == 3) {
-                    wipe3( buildArray, ordArr );
-                }
-                if (oLength == 4) {
-                    wipe4( buildArray, ordArr );
-                }
-                if (oLength == 5) {
-                    wipe5( buildArray, ordArr );
-                }
+                    // Create list of elements, stored in indeces above 'i'.
+                    int[] ordArr;
+                    ordArr = Arrays.copyOfRange( buildArray, (high + 1), numElements );
+//                    List<Integer> preOrdList = IntStream.of( ordArr ).boxed().collect( Collectors.toList() );
+//                    preOrdList.remove( oLength - i );
+//                    ordArr = preOrdList.stream().mapToInt( Integer::intValue ).toArray();
+                    int oLength = ordArr.length;
 
-                // This rebuilds the appropriate array into an Integer to return.
-                for (int k = 0; k < strLength; k++) {
-                    rebuiltInt *= 10;
-                    rebuiltInt += buildArray[k];
+                    // Call appropriate method to reorder portion of 'buildArray'.
+                    if (oLength == 1) {
+                    } else if (oLength == 2) {
+                        wipe2( buildArray, ordArr );
+                    } else if (oLength == 3) {
+                        wipe3( buildArray, ordArr );
+                    } else if (oLength == 4) {
+                        wipe4( buildArray, ordArr );
+                    } else if (oLength == 5) {
+                        wipe5( buildArray, ordArr );
+                    }
+                    break;
                 }
-
-                if (rebuiltInt <= integ) {
-                    rebuiltInt = -1;
+                if (origBuild != buildArray){
+                    break;
                 }
             }
-        }
 
-        int finalInt = rebuiltInt;
-        return finalInt;
+
+            // This rebuilds the appropriate array into an int to return.
+            for (int k = 0; k < numElements; k++) {
+                rebuiltInt *= 10;
+                rebuiltInt += buildArray[k];
+            }
+        if (integ < rebuiltInt) {
+            return rebuiltInt;
+        } else {
+            return -1;
+        }
     }
 
-    private static void wipe3 ( int[] buildArr, int[] orderArr){
+    private static int[] wipe2 ( int[] buildArr, int[] orderArr){
+
+        int lnth = buildArr.length;
+
+        Arrays.sort( orderArr );
+        buildArr[lnth - 2] = orderArr[0];
+        buildArr[lnth - 1] = orderArr[1];
+
+        return buildArr;
+    }
+
+    private static int[] wipe3 ( int[] buildArr, int[] orderArr){
 
         int lnth = buildArr.length;
 
@@ -83,9 +104,11 @@ public class NextBiggestNumber {
         buildArr[lnth - 3] = orderArr[0];
         buildArr[lnth - 2] = orderArr[1];
         buildArr[lnth - 1] = orderArr[2];
+
+        return buildArr;
     }
 
-    public static void wipe4 ( int[] buildArr, int[] orderArr){
+    public static int[] wipe4 (int[] buildArr, int[] orderArr){
 
         int lnth = buildArr.length;
 
@@ -94,9 +117,11 @@ public class NextBiggestNumber {
         buildArr[lnth - 3] = orderArr[1];
         buildArr[lnth - 2] = orderArr[2];
         buildArr[lnth - 1] = orderArr[3];
+
+        return buildArr;
     }
 
-    public static void wipe5 ( int[] buildArr, int[] orderArr){
+    public static int[] wipe5 ( int[] buildArr, int[] orderArr){
 
         int lnth = buildArr.length;
 
@@ -106,5 +131,7 @@ public class NextBiggestNumber {
         buildArr[lnth - 3] = orderArr[2];
         buildArr[lnth - 2] = orderArr[3];
         buildArr[lnth - 1] = orderArr[4];
+
+        return buildArr;
     }
 }
