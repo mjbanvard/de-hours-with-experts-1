@@ -6,8 +6,7 @@ public class NextBiggestNumber {
 
     public static void main(String[] args) {
         Integer input = Integer.parseInt(args[0]);
-        Integer nextBiggestNumber = getNextBiggestNumber(input);
-//        Integer newInt = nextBiggestNumber;
+        int nextBiggestNumber = getNextBiggestNumber(input);
         System.out.println("Input: " + input);
         System.out.println( "Next biggest number: " + nextBiggestNumber );
     }
@@ -49,7 +48,7 @@ public class NextBiggestNumber {
         }
 
 // This rebuilds the appropriate array into an Integer to return.
-        Integer rebuiltInt = 0;
+        int rebuiltInt = 0;
         for( int k=0; k < arrLength; k++) {
             rebuiltInt *= 10;
             rebuiltInt += compBuildArray[k];
@@ -193,7 +192,7 @@ public class NextBiggestNumber {
         return bld5Arr;
     }
 
-    public static int[] wipe3(int[] buildArr, int[] orderArr) {
+    public static void wipe3(int[] buildArr, int[] orderArr) {
 
         int lnth = buildArr.length;
 
@@ -202,10 +201,9 @@ public class NextBiggestNumber {
         buildArr[lnth - 2] = orderArr[1];
         buildArr[lnth - 1] = orderArr[2];
 
-        return buildArr;
     }
 
-    public static int[] wipe4(int[] buildArr, int[] orderArr) {
+    public static void wipe4(int[] buildArr, int[] orderArr) {
 
         int lnth = buildArr.length;
 
@@ -215,7 +213,6 @@ public class NextBiggestNumber {
         buildArr[lnth - 2] = orderArr[2];
         buildArr[lnth - 1] = orderArr[3];
 
-        return buildArr;
     }
 
 }
