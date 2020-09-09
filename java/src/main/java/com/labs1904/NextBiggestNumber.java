@@ -35,26 +35,27 @@ public class NextBiggestNumber {
         // values less than the original number, and narrows down the remaining numbers to find the one that is
         // "just greater than" the given input.
 
-        outer: for (int i = 2; i <= numElements; i += 1)
+        outer: for (int i = 2; i <= numElements; i += 1) {
             for (int j = 1; j < i; j += 1) {
                 int low = numElements - j;
                 int high = numElements - i;
                 if (buildArray[low] > buildArray[high]) {
-        // Swap compared values
+                    // Swap compared values
                     int temp;
                     temp = buildArray[high];
                     buildArray[high] = buildArray[low];
                     buildArray[low] = temp;
 
-        // Create list of elements, stored in indeces above 'high'.
+                    // Create list of elements, stored in indeces above 'high'.
                     int[] ordArr;
                     ordArr = Arrays.copyOfRange( buildArray, (high + 1), numElements );
                     wipeAll( buildArray, ordArr );
 
-        // Once the match is found, end both loops by breaking outer loop
+                    // Once the match is found, end both loops by breaking outer loop
                     break outer;
                 }
             }
+        }
 
 
         // This rebuilds the appropriate array into an int to return.
